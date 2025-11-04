@@ -4,7 +4,7 @@ import { useEffect } from "react";
 export default function Intro({ show, onFinish }) {
   useEffect(() => {
     if (show) {
-      const t = setTimeout(() => onFinish(), 7000); // total 7s
+      const t = setTimeout(() => onFinish(), 6000); 
       return () => clearTimeout(t);
     }
   }, [show, onFinish]);
@@ -15,27 +15,27 @@ export default function Intro({ show, onFinish }) {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.25 }}
           className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-black overflow-hidden text-[#FFD700] font-extrabold text-center"
         >
-          {/* 1️⃣ Fog layer (background smoke) */}
+         
           <motion.div
             initial={{ opacity: 1, scale: 1.1 }}
             animate={{ opacity: 0, scale: 1.2 }}
-            transition={{ duration: 3, ease: "easeOut" }}
+            transition={{ duration: 0.1, ease: "easeOut" }}
             className="absolute inset-0 bg-[url('/fog.png')] bg-cover bg-center opacity-80 blur-sm"
             style={{
               mixBlendMode: "lighten",
             }}
           />
 
-          {/* 2️⃣ Main Text coming in after fog starts clearing */}
+         
           <div className="relative z-40 flex items-center gap-3 text-5xl md:text-7xl mt-4">
-            {/* Left side (AAGAAZ) */}
+            
             <motion.span
               initial={{ opacity: 0, x: -200 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 3, duration: 1, ease: "easeOut" }}
+              transition={{ delay: 1.5, duration: 1, ease: "easeOut" }}
               style={{
                 textShadow:
                   "0 0 25px #FFD700, 0 0 45px rgba(255,215,0,0.6)",
@@ -44,11 +44,11 @@ export default function Intro({ show, onFinish }) {
               AAGAAZ
             </motion.span>
 
-            {/* Right side (2.0) */}
+           
             <motion.span
               initial={{ opacity: 0, x: 200 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 3.3, duration: 1, ease: "easeOut" }}
+              transition={{ delay: 1.5, duration: 1, ease: "easeOut" }}
               className="text-white"
               style={{
                 textShadow:
@@ -59,22 +59,22 @@ export default function Intro({ show, onFinish }) {
             </motion.span>
           </div>
 
-          {/* Subtitle */}
+          
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 4, duration: 1 }}
+            transition={{ delay: 2, duration: 1 }}
             className="mt-6 text-xl md:text-2xl text-white/90 tracking-wide z-40"
           >
-            Bollywood Night 2025
+            The OG CSE freshers!!
           </motion.p>
 
-          {/* 3️⃣ Projector Light Sweep */}
+         
           <motion.div
             initial={{ x: "-150%", opacity: 0.6 }}
             animate={{ x: "150%", opacity: [0.6, 1, 0.6] }}
             transition={{
-              delay: 5.2,
+              delay: 4.2,
               duration: 1.5,
               ease: "easeInOut",
             }}
