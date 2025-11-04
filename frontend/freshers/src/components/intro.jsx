@@ -4,7 +4,7 @@ import { useEffect } from "react";
 export default function Intro({ show, onFinish }) {
   useEffect(() => {
     if (show) {
-      const t = setTimeout(() => onFinish(), 6000); 
+      const t = setTimeout(() => onFinish(), 5000); 
       return () => clearTimeout(t);
     }
   }, [show, onFinish]);
@@ -74,7 +74,7 @@ export default function Intro({ show, onFinish }) {
             initial={{ x: "-150%", opacity: 0.6 }}
             animate={{ x: "150%", opacity: [0.6, 1, 0.6] }}
             transition={{
-              delay: 4.2,
+              delay: 2.8,
               duration: 1.5,
               ease: "easeInOut",
             }}
