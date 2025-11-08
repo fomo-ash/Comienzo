@@ -39,7 +39,7 @@ export default function Hero() {
         transition={{ delay: 0.5, duration: 1 }}
         className="text-4xl md:text-6xl font-extrabold text-[#FFD700] drop-shadow-[0_0_20px_rgba(255,215,0,0.8)] z-10"
       >
-        Why So Serious?
+        Why So CSErious?
       </motion.h1>
     </section>
   );

@@ -41,7 +41,7 @@ export default function Intro({ show, onFinish }) {
                   "0 0 25px #FFD700, 0 0 45px rgba(255,215,0,0.6)",
               }}
             >
-              AAGAAZ
+             Reminisce
             </motion.span>
 
            
