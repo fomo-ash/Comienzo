@@ -1,23 +1,21 @@
-import React from "react";
+import React from 'react';
 
-export default function Navbar() {
-  return (
-    <nav className="fixed top-2 left-2 right-2 z-50 w-full bg-white/10 backdrop-blur-lg border-b border-white/20 px-10 py-4 flex items-center justify-center gap-10 text-white text-sm font-medium shadow-[0_0_40px_rgba(255,215,0,0.2)]">
-      <a href="#home" className="hover:text-[#FFD700] transition-colors">
-        Home
-      </a>
-      <a href="#events" className="hover:text-[#FFD700] transition-colors">
-        Events
-      </a>
-      <a href="#theme" className="hover:text-[#FFD700] transition-colors">
-        Theme
-      </a>
-      <a href="#gallery" className="hover:text-[#FFD700] transition-colors">
-        Gallery
-      </a>
-      <a href="#signin" className="hover:text-[#FFD700] transition-colors">
-        Sign In
-      </a>
-    </nav>
-  );
+
+export default function NavBar() {
+return (
+<header className="max-w-5xl mx-auto px-6 pt-8">
+<nav className="flex items-center justify-between">
+<div className="flex items-center gap-4">
+<div className="w-12 h-12 rounded-full bg-[#2f2b2b] flex items-center justify-center text-2xl font-bold text-cream text-white">JD</div>
+<div className="text-white text-2xl tracking-wider font-extrabold drop-shadow-lg">RETRO</div>
+</div>
+<ul className="hidden md:flex gap-6 text-white uppercase text-sm tracking-widest">
+<li className="cursor-pointer">About</li>
+<li className="cursor-pointer">Events</li>
+<li className="cursor-pointer">Schedule</li>
+<li className="cursor-pointer">Contact</li>
+</ul>
+</nav>
+</header>
+);
 }

@@ -1,15 +1,21 @@
 @import "tailwindcss";
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); opacity: 0.6; }
-  50% { transform: translateY(-10px); opacity: 1; }
+
+.text-cream { color: #f5e6d3; }
+
+@media (min-width:1280px) {
+  h1 { line-height: 0.9; }
 }
 
-@keyframes spin-slow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+body {
+  background-color: #0A0A0A;
+  color: #E0E0E0; /* A light gray for text */
+  font-family: 'Your-New-Sans-Serif-Font', sans-serif;
 }
 
-.animate-spin-slow {
-  animation: spin-slow 45s linear infinite;
+#root { 
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  min-height: 100vh;
 }
