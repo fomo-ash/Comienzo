@@ -1,24 +1,24 @@
 import { useState } from "react";
-import Intro from "./components/intro.jsx";
-import Hero from "./components/Hero.jsx";
-import Navbar from "./components/navbar.jsx";
-import MusicPlayer from "./components/music.jsx";
-
+import EntryAnimation from "./components/intro";
+import Hero from "./components/Hero";
+import MusicPlayer from "./components/music";
 
 export default function App() {
-  const [showIntro, setShowIntro] = useState(true);
+  const [showEntry, setShowEntry] = useState(true);
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden">
-    
+    <div className="relative min-h-screen overflow-hidden">
+      
+      
+      {showEntry && (
+        <EntryAnimation onFinish={() => setShowEntry(false)} />
+      )}
 
-      <Intro show={showIntro} onFinish={() => setShowIntro(false)} />
-
-      {!showIntro && (
+     
+      {!showEntry && (
         <>
-          <Navbar />
           <Hero />
-          <MusicPlayer/>
+          <MusicPlayer/>    
         </>
       )}
     </div>

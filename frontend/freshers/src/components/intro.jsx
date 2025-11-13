@@ -1,87 +1,77 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
+import { motion } from "framer-motion";
 
-export default function Intro({ show, onFinish }) {
-  useEffect(() => {
-    if (show) {
-      const t = setTimeout(() => onFinish(), 5000); 
-      return () => clearTimeout(t);
-    }
-  }, [show, onFinish]);
+export default function EntryAnimation({ onFinish }) {
+
+  const letters = "COMIENZO".split("");
 
   return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-black overflow-hidden text-[#FFD700] font-extrabold text-center"
-        >
-         
-          <motion.div
-            initial={{ opacity: 1, scale: 1.1 }}
-            animate={{ opacity: 0, scale: 1.2 }}
-            transition={{ duration: 0.1, ease: "easeOut" }}
-            className="absolute inset-0 bg-[url('/fog.png')] bg-cover bg-center opacity-80 blur-sm"
-            style={{
-              mixBlendMode: "lighten",
-            }}
-          />
+    <motion.div
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+    >
 
-         
-          <div className="relative z-40 flex items-center gap-3 text-5xl md:text-7xl mt-4">
-            
-            <motion.span
-              initial={{ opacity: 0, x: -200 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.5, duration: 1, ease: "easeOut" }}
-              style={{
-                textShadow:
-                  "0 0 25px #FFD700, 0 0 45px rgba(255,215,0,0.6)",
-              }}
-            >
-             Reminisce
-            </motion.span>
+      {/* BACKGROUND COLOR ANIMATION */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ backgroundColor: "#063F38" }}
+        animate={{ backgroundColor: "#0D7160" }}
+        transition={{ duration: 2 }}
+      />
 
-           
-            <motion.span
-              initial={{ opacity: 0, x: 200 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.5, duration: 1, ease: "easeOut" }}
-              className="text-white"
-              style={{
-                textShadow:
-                  "0 0 25px #ffffff, 0 0 45px rgba(255,215,0,0.6)",
-              }}
-            >
-              &nbsp;2.0
-            </motion.span>
-          </div>
+      {/* GRAIN OVERLAY (OPTIONAL AESTHETIC) */}
+      <div className="absolute inset-0 pointer-events-none opacity-20 mix-blend-overlay"
+        style={{ backgroundImage: "url('/grain.png')" }} />
 
-          
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2, duration: 1 }}
-            className="mt-6 text-xl md:text-2xl text-white/90 tracking-wide z-40"
-          >
-            The OG CSE freshers!!
-          </motion.p>
-
-         
-          <motion.div
-            initial={{ x: "-150%", opacity: 0.6 }}
-            animate={{ x: "150%", opacity: [0.6, 1, 0.6] }}
+      {/* COMIENZO LETTER ANIMATION */}
+      <div className="relative z-10 flex gap-2 md:gap-4">
+        {letters.map((letter, i) => (
+          <motion.span
+            key={i}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{
-              delay: 2.8,
-              duration: 1.5,
-              ease: "easeInOut",
+              delay: 0.3 + i * 0.15,
+              duration: 0.6,
+              ease: "easeOut"
             }}
-            className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#FFD700]/40 to-transparent blur-2xl z-30"
-          />
-        </motion.div>
-      )}
-    </AnimatePresence>
+            className="text-white text-5xl md:text-7xl font-bold tracking-widest"
+          >
+            {letter === "I" ? (
+              <motion.span
+                className="inline-block relative"
+              >
+                I
+                <motion.span
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.3 + i * 0.15 + 0.2 }}
+                  className="absolute -top-4 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#FFD300] rounded-full"
+                ></motion.span>
+              </motion.span>
+            ) : letter}
+          </motion.span>
+        ))}
+      </div>
+
+      {/* TAGLINE */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute bottom-[30%] text-white/80 text-lg tracking-wider"
+      >
+        cse’t la fkin vie
+      </motion.p>
+
+      {/* EXIT ANIMATION - SLIDE UP */}
+      <motion.div
+        initial={{ y: 0 }}
+        animate={{ y: "-100%" }}
+        transition={{ delay: 4, duration: 1.2, ease: "easeInOut" }}
+        onAnimationComplete={onFinish}
+        className="absolute inset-0"
+      />
+    </motion.div>
   );
 }
