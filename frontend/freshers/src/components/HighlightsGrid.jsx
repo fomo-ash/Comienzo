@@ -1,31 +1,102 @@
-import React from 'react';
+import React from "react";
+import { motion } from "framer-motion";
 
+const EventCard = ({ title, description, img }) => {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.15, zIndex: 20 }}
+      transition={{ type: "spring", stiffness: 250, damping: 20 }}
+      className="
+        min-w-[320px] md:min-w-[380px] lg:min-w-[430px]
+        bg-[#0F766E]/40 backdrop-blur-xl
+        rounded-2xl overflow-hidden border-2 border-white/40
+        shadow-[0_0_25px_rgba(255,255,255,0.15)]
+        hover:shadow-[0_0_35px_10px_rgba(173,243,234,0.35)]
+        cursor-pointer transform-gpu
+        transition-all duration-300 mx-4
+      "
+    >
+      <img
+        src={img}
+        alt={title}
+        className="w-full h-64 object-cover opacity-95"
+      />
+
+      <div className="p-6">
+        <h2 className="text-2xl font-extrabold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+          {title}
+        </h2>
+        <p className="text-white/85 mt-2 text-sm leading-relaxed">
+          {description}
+        </p>
+      </div>
+    </motion.div>
+  );
+};
 
 export default function HighlightsGrid() {
-return (
-<section className="max-w-5xl mx-auto px-6 mt-10 mb-16">
-<h3 className="text-3xl font-bold text-center text-[#2f2b2b]">Event Highlights</h3>
-<p className="text-center text-sm text-[#666] mt-2">Filter by: <span className="mx-2 px-2 py-1 bg-white text-xs rounded-full">music</span> <span className="mx-2 px-2 py-1 bg-white text-xs rounded-full">games</span> <span className="mx-2 px-2 py-1 bg-white text-xs rounded-full">food</span></p>
+  const events = [
+    {
+      title: "Comedy Ke Sitare",
+      description:
+        "A hilarious comedy night with skits and jokes that bring the house down!",
+      img: "/src/assets/test.png",
+    },
+    {
+      title: "Dance Hungama",
+      description:
+        "A high-energy dance fest filled with performances that set the stage on fire!",
+      img: "/src/assets/test.png",
+    },
+    {
+      title: "Mystery Games",
+      description:
+        "Exciting games that challenge your instincts, speed, and teamwork!",
+      img: "/src/assets/test.png",
+    },
+    {
+      title: "Mystery Games",
+      description:
+        "Exciting games that challenge your instincts, speed, and teamwork!",
+      img: "/src/assets/test.png",
+    },
+    {
+      title: "Mystery Games",
+      description:
+        "Exciting games that challenge your instincts, speed, and teamwork!",
+      img: "/src/assets/test.png",
+    },
+    {
+      title: "Mystery Games",
+      description:
+        "Exciting games that challenge your instincts, speed, and teamwork!",
+      img: "/src/assets/test.png",
+    },
+  ];
 
+  return (
+    <div className="py-24 bg-transparent">
+      <h1 className="text-4xl md:text-5xl font-extrabold text-white text-center drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] mb-2">
+        EVENTS
+      </h1>
 
-<div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-{Array.from({ length: 8 }).map((_, i) => (
-<div key={i} className="bg-white rounded-lg overflow-hidden shadow-sm border">
-<div className="h-36 bg-gray-100 flex items-center justify-center">
-<img src={`/assets/thumb-${i % 4}.jpg`} alt={`thumb-${i}`} className="object-cover h-full w-full" />
-</div>
-<div className="p-4">
-<h4 className="font-bold text-sm text-[#2f2b2b]">Showcase #{i + 1}</h4>
-<p className="text-xs text-[#666] mt-2">Short description of this highlight or activity.</p>
-</div>
-</div>
-))}
-</div>
+      <p className="text-white/70 text-center mb-12 tracking-[0.15em] uppercase">
+        Scroll → to explore
+      </p>
 
-
-<div className="mt-8 text-center">
-<button className="px-6 py-2 rounded-full bg-[#d07b6b] text-white font-semibold uppercase tracking-wide">Browse all</button>
-</div>
-</section>
-);
+      {/* Horizontal Scroll Row */}
+      <div
+        className="
+          flex overflow-x-auto no-scrollbar
+          px-4 pb-8 snap-x snap-mandatory
+        "
+      >
+        {events.map((ev, i) => (
+          <div key={i} className="snap-start">
+            <EventCard {...ev} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
