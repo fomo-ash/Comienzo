@@ -1,59 +1,62 @@
 // src/components/Hero.jsx
 import React from "react";
+import { motion } from "framer-motion";
 import Countdown from "./Countdown";
 
-const EVENT_DATE = "2025-11-23T18:00:00+05:30"; // 23 Nov 2025, 18:00 IST
+const EVENT_DATE = "2025-11-23T18:00:00+05:30";
 
-export default function Hero({ heroImg = null }) {
+export default function Hero() {
   return (
-    <section className="w-full mx-auto mt-6">
-      {/* center and constrain hero to max-w-5xl so features below can match it */}
-      <div className="max-w-5xl mx-auto">
-        <div className="bg-white/90 rounded-2xl border border-white shadow-xl overflow-hidden">
-          <div className="flex flex-col items-center px-8 py-10">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#2f2b2b] text-center">
-              COMIENZO
-            </h1>
+    <section className="w-full min-h-screen flex flex-col lg:flex-row 
+      items-center justify-between 
+      px-6 md:px-12 pb-5 lg:px-20 bg-[#0F766E]">
 
-            <div className="mt-4 px-4 py-2 bg-yellow-100 rounded-full text-xs uppercase text-[#2f2b2b] font-semibold">
-              Welcome Batch 2025
-            </div>
+      {/* LEFT SIDE CONTENT */}
+      <div className="w-full lg:w-1/2 space-y-6 mt-32 lg:mt-0">
+        {/* ↑ increased mobile margin */}
 
-            <div className="mt-8 w-full">
-              {heroImg && (
-                <div className="w-full h-56 md:h-72 lg:h-96 overflow-hidden rounded-md border border-gray-100 mb-6">
-                  <img src={heroImg} alt="Event preview" className="w-full h-full object-cover" />
-                </div>
-              )}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-5xl md:text-6xl lg:text-7xl 
+          font-extrabold leading-tight text-white"
+        >
+          Let the  
+          <span className="block text-yellow-300">Chapter Unfold</span>
+        </motion.h1>
 
-              {/* Countdown card */}
-              <div className="bg-[#f7fbfb] p-6 md:p-8 rounded-xl border border-gray-200 shadow-md flex flex-col items-center">
-                <p className="text-sm text-[#556] mb-2">The big night begins in</p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.7 }}
+          className="text-lg md:text-xl text-white/80 max-w-xl"
+        >
+        COMIENZO marks the first chapter of your CSE journey - a night overflowing with energy, laughter, chaos, and memories that will stay with you long after the lights fade.
+        </motion.p>
 
-                <Countdown targetDate={EVENT_DATE} onEnd={() => console.log("Event started")} />
-
-                <div className="mt-6 flex gap-3">
-                  <a
-                    href="#tickets"
-                    className="inline-block px-6 py-2 rounded-full bg-[#d07b6b] text-white font-semibold uppercase tracking-wide"
-                  >
-                    Register
-                  </a>
-                  <a
-                    href="#schedule"
-                    className="inline-block px-6 py-2 rounded-full border border-[#d07b6b] text-[#2f2b2b] font-semibold uppercase tracking-wide"
-                  >
-                    Schedule
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* MOBILE COUNTDOWN BELOW TEXT */}
+        <div className="flex lg:hidden justify-center mt-10">
+          <Countdown targetDate={EVENT_DATE} />
         </div>
-        {/* small spacer so features sit below with visible gap */}
-        <div className="h-8" />
       </div>
+
+      {/* DESKTOP COUNTDOWN ON RIGHT */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="
+          hidden lg:flex
+          flex-col items-center justify-center
+          rounded-2xl 
+          px-10 py-6
+          ml-10
+        "
+      >
+        <Countdown targetDate={EVENT_DATE} />
+      </motion.div>
+
     </section>
   );
 }
-
