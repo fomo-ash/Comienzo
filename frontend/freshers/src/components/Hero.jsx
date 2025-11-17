@@ -35,12 +35,12 @@ export default function Hero() {
         COMIENZO marks the first chapter of your CSE journey - a night overflowing with energy, laughter, chaos, and memories that will stay with you long after the lights fade.
         </motion.p>
 
-      {/* BUTTONS */}
+     {/* BUTTONS */}
 <motion.div
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.35, duration: 0.7 }}
-  className="flex flex-wrap gap-4 mt-6"
+  className="flex flex-col sm:flex-row flex-wrap gap-4 mt-6 w-full"
 >
   {/* YELLOW BUTTON */}
   <motion.a
@@ -49,9 +49,13 @@ export default function Hero() {
     href="https://docs.google.com/forms/d/e/1FAIpQLSfxpSM_8xBvA7s3KSF0C_eEktU9T1J5oTKh4CxnIj_rzkXJJQ/viewform"
     target="_blank"
     rel="noopener noreferrer"
-    className="px-6 py-3 bg-yellow-300 text-black font-semibold 
-               rounded-xl shadow-lg 
-               transition-all duration-300 hover:bg-yellow-400"
+    className="
+      w-full sm:w-auto
+      text-center
+      px-6 py-3 bg-yellow-300 text-black font-semibold 
+      rounded-xl shadow-lg 
+      transition-all duration-300 hover:bg-yellow-400
+    "
   >
     1st year Form
   </motion.a>
@@ -63,9 +67,13 @@ export default function Hero() {
     href="https://docs.google.com/forms/d/e/1FAIpQLScR1FefXTBLhkQg23v8GZ_rq-173JYijEN-kGSQPTfAwhkB6g/viewform"
     target="_blank"
     rel="noopener noreferrer"
-    className="px-6 py-3 bg-white text-black font-semibold 
-               rounded-xl shadow-lg 
-               transition-all duration-300 hover:bg-gray-200"
+    className="
+      w-full sm:w-auto
+      text-center
+      px-6 py-3 bg-white text-black font-semibold 
+      rounded-xl shadow-lg 
+      transition-all duration-300 hover:bg-gray-200
+    "
   >
     2nd year Form
   </motion.a>
