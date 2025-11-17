@@ -34,12 +34,6 @@ export default function App() {
         <>
           <NavBar />
           <Hero />
-<<<<<<< HEAD
-          <div className="max-w-screen-2xl mx-auto px-8 lg:px-16 ">
-            
-            <HighlightsGrid/>
-            <Menu/>
-=======
           <Venue/>
 
           <div className="max-w-screen-2xl mx-auto px-8 lg:px-16">
@@ -48,7 +42,6 @@ export default function App() {
 
             {/* 📘 FROM THE ARCHIVES SECTION */}
             <ArchivesGallery photos={archivePhotos} />
->>>>>>> e21b9dba009de63931200253f0a745377ae8a9d4
           </div>
 
           <Footer />
