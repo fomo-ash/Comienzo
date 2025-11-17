@@ -35,6 +35,44 @@ export default function Hero() {
         COMIENZO marks the first chapter of your CSE journey - a night overflowing with energy, laughter, chaos, and memories that will stay with you long after the lights fade.
         </motion.p>
 
+      {/* BUTTONS */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.35, duration: 0.7 }}
+  className="flex flex-wrap gap-4 mt-6"
+>
+  {/* YELLOW BUTTON */}
+  <motion.a
+    whileHover={{ scale: 1.07, boxShadow: "0px 0px 18px rgba(255, 230, 0, 0.6)" }}
+    whileTap={{ scale: 0.96 }}
+    href="https://docs.google.com/forms/d/e/1FAIpQLSfxpSM_8xBvA7s3KSF0C_eEktU9T1J5oTKh4CxnIj_rzkXJJQ/viewform"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="px-6 py-3 bg-yellow-300 text-black font-semibold 
+               rounded-xl shadow-lg 
+               transition-all duration-300 hover:bg-yellow-400"
+  >
+    1st year Form
+  </motion.a>
+
+  {/* WHITE BUTTON */}
+  <motion.a
+    whileHover={{ scale: 1.07, boxShadow: "0px 0px 16px rgba(255, 255, 255, 0.5)" }}
+    whileTap={{ scale: 0.96 }}
+    href="https://docs.google.com/forms/d/e/1FAIpQLScR1FefXTBLhkQg23v8GZ_rq-173JYijEN-kGSQPTfAwhkB6g/viewform"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="px-6 py-3 bg-white text-black font-semibold 
+               rounded-xl shadow-lg 
+               transition-all duration-300 hover:bg-gray-200"
+  >
+    2nd year Form
+  </motion.a>
+</motion.div>
+
+
+
         {/* MOBILE COUNTDOWN BELOW TEXT */}
         <div className="flex lg:hidden justify-center mt-10">
           <Countdown targetDate={EVENT_DATE} />
