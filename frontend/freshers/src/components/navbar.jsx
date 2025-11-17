@@ -41,7 +41,9 @@ export default function NavBar() {
               <img src={logo} alt="Comienzo Logo" className="w-full h-full object-cover" />
             </div>
 
-            <div className="text-white text-2xl md:text-3xl tracking-wider font-extrabold">
+            {/* <div className="text-white text-2xl md:text-3xl tracking-wider font-extrabold"> */}
+             <div className="text-white text-4xl md:text-3xl tracking-widest"
+style={{ fontFamily: "Limelight, cursive" }}>
               COMIENZO
             </div>
           </div>
