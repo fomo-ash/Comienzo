@@ -35,7 +35,9 @@ export default function EntryAnimation({ onFinish }) {
               duration: 0.6,
               ease: "easeOut"
             }}
-            className="text-white text-5xl md:text-7xl font-bold tracking-widest"
+            className="text-white text-5xl md:text-7xl tracking-widest"
+            style={{ fontFamily: "Limelight, cursive" }}
+
           >
             {letter === "I" ? (
               <motion.span
@@ -59,7 +61,9 @@ export default function EntryAnimation({ onFinish }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-[30%] text-white/80 text-lg tracking-wider"
+        className="absolute bottom-[40%] text-white/80 text-lg tracking-wider italic"
+
+
       >
         cse’t la fkin vie
       </motion.p>

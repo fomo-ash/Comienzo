@@ -12,7 +12,7 @@ export default function Hero() {
       px-6 md:px-12 pb-5 lg:px-20 ">
 
       {/* LEFT SIDE CONTENT */}
-      <div className="w-full lg:w-1/2 space-y-6 pt-32 md:pt-40 lg:pt-48">
+      <div className="w-full lg:w-1/2 space-y-6 pt-32 md:pt-35 lg:pt-48">
         {/* ↑ increased mobile margin */}
 
         <motion.h1

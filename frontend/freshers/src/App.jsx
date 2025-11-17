@@ -8,17 +8,23 @@ import EntryAnimation from "./components/intro";
 import ArchivesGallery from "./components/ArchivesGallery";
 import Venue from "./components/venue";
 
+// IMPORT ARCHIVE IMAGES PROPERLY
+import img1 from "./assets/2.jpeg";
+import img2 from "./assets/1.jpeg";
+import img3 from "./assets/3.jpeg";
+
+
 export default function App() {
   const [showEntry, setShowEntry] = useState(true);
 
-  // ARCHIVE PHOTOS LIST
+  // ARCHIVE PHOTOS LIST (NOW VALID)
   const archivePhotos = [
-    { src: "/src/assets/archives/pic1.jpeg", caption: "The beginning ✦" },
-    { src: "/src/assets/archives/pic2.jpeg", caption: "Golden night memories" },
-    { src: "/src/assets/archives/pic3.jpeg", caption: "Laughs we won't forget" },
-    { src: "/src/assets/archives/pic4.jpeg", caption: "Captured joy ✦" },
-    { src: "/src/assets/archives/pic5.jpeg", caption: "Moments frozen in time" },
-    { src: "/src/assets/archives/pic6.jpeg", caption: "Batch memories ✦" },
+    { src: img1, caption: "The beginning ✦" },
+    { src: img2, caption: "Golden night memories" },
+    { src: img3, caption: "Laughs we won't forget" },
+    { src: img1, caption: "Captured joy ✦" },
+    { src: img2, caption: "Moments frozen in time" },
+    { src: img3, caption: "Batch memories ✦" },
   ];
 
   return (
@@ -34,7 +40,7 @@ export default function App() {
         <>
           <NavBar />
           <Hero />
-          <Venue/>
+          <Venue />
 
           <div className="max-w-screen-2xl mx-auto px-8 lg:px-16">
             <HighlightsGrid />
