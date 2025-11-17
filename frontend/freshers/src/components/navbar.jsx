@@ -6,6 +6,13 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function NavBar() {
   const [open, setOpen] = useState(false);
 
+  // Smooth scroll
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+    setOpen(false);
+  };
+
   return (
     <>
       {/* Floating Navbar */}
@@ -25,11 +32,11 @@ export default function NavBar() {
             px-6 py-4
             bg-white/20 backdrop-blur-xl 
             border border-white/30 
-            shadow-xl rounded-2xl
+            shadow-2xl rounded-3xl
           "
         >
           {/* LOGO + TITLE */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 cursor-pointer" onClick={() => scrollToSection("hero")}>
             <div className="w-14 h-14 rounded-full overflow-hidden border-4 border-white/60 shadow-md bg-white flex items-center justify-center">
               <img src={logo} alt="Comienzo Logo" className="w-full h-full object-cover" />
             </div>
@@ -41,10 +48,18 @@ export default function NavBar() {
 
           {/* DESKTOP MENU */}
           <ul className="hidden lg:flex gap-10 text-white uppercase text-sm tracking-wider font-medium">
-            <li className="cursor-pointer hover:text-yellow-300 transition">Home</li>
-            <li className="cursor-pointer hover:text-yellow-300 transition">Events</li>
-            <li className="cursor-pointer hover:text-yellow-300 transition">Venue</li>
-            <li className="cursor-pointer hover:text-yellow-300 transition">Menu</li>
+            {["home", "events", "venue", "menu"].map((item) => (
+              <li
+                key={item}
+                onClick={() => scrollToSection(item)}
+                className="
+                  cursor-pointer relative 
+                  hover:text-yellow-300 transition
+                "
+              >
+                {item.toUpperCase()}
+              </li>
+            ))}
           </ul>
 
           {/* MOBILE MENU ICON */}
@@ -64,48 +79,33 @@ export default function NavBar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
             className="
               lg:hidden
-              fixed top-[90px]
+              fixed top-[95px]
               left-1/2 -translate-x-1/2
               w-[92%] md:w-[80%]
               bg-white/20 backdrop-blur-xl
               border border-white/30
               shadow-xl
               rounded-2xl
-              py-5
+              py-6
               z-[60]
             "
           >
             <ul className="flex flex-col items-center gap-6 text-white text-lg tracking-wide">
-              <li
-                className="hover:text-yellow-300 transition cursor-pointer"
-                onClick={() => setOpen(false)}
-              >
-                Home
-              </li>
-              <li
-                className="hover:text-yellow-300 transition cursor-pointer"
-                onClick={() => setOpen(false)}
-              >
-                Events
-              </li>
-              <li
-                className="hover:text-yellow-300 transition cursor-pointer"
-                onClick={() => setOpen(false)}
-              >
-                Venue
-              </li>
-              <li
-                className="hover:text-yellow-300 transition cursor-pointer"
-                onClick={() => setOpen(false)}
-              >
-                Menu
-              </li>
+              {["home", "events", "venue", "menu"].map((item) => (
+                <li
+                  key={item}
+                  className="hover:text-yellow-300 transition cursor-pointer"
+                  onClick={() => scrollToSection(item)}
+                >
+                  {item.toUpperCase()}
+                </li>
+              ))}
             </ul>
           </motion.div>
         )}
