@@ -5,6 +5,7 @@ import Features from "./components/Features";
 import HighlightsGrid from "./components/HighlightsGrid";
 import Footer from "./components/Footer";
 import EntryAnimation from "./components/intro";
+import Menu from "./components/menu";
 
 export default function App() {
   const [showEntry, setShowEntry] = useState(true);
@@ -26,6 +27,7 @@ export default function App() {
           <div className="max-w-screen-2xl mx-auto px-8 lg:px-16">
             <Features />
             <HighlightsGrid/>
+            <Menu/>
           </div>
           <Footer />
         </>
