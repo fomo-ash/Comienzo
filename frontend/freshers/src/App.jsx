@@ -13,10 +13,10 @@ export default function App() {
 
   // ARCHIVE PHOTOS LIST
   const archivePhotos = [
-    { src: "/src/assets/archives/pic1.jpeg", caption: "The beginning ✦" },
-    { src: "/src/assets/archives/pic2.jpeg", caption: "Golden night memories" },
-    { src: "/src/assets/archives/pic3.jpeg", caption: "Laughs we won't forget" },
-    { src: "/src/assets/archives/pic4.jpeg", caption: "Captured joy ✦" },
+    { src: "/src/assets/2.jpeg", caption: "The beginning ✦" },
+    { src: "/src/assets/1.jpeg", caption: "Golden night memories" },
+    { src: "/src/assets/3.jpeg", caption: "Laughs we won't forget" },
+    { src: "/src/assets/3.jpeg", caption: "Captured joy ✦" },
     { src: "/src/assets/archives/pic5.jpeg", caption: "Moments frozen in time" },
     { src: "/src/assets/archives/pic6.jpeg", caption: "Batch memories ✦" },
   ];
@@ -34,12 +34,6 @@ export default function App() {
         <>
           <NavBar />
           <Hero />
-<<<<<<< HEAD
-          <div className="max-w-screen-2xl mx-auto px-8 lg:px-16 ">
-            
-            <HighlightsGrid/>
-            <Menu/>
-=======
           <Venue/>
 
           <div className="max-w-screen-2xl mx-auto px-8 lg:px-16">
@@ -48,7 +42,6 @@ export default function App() {
 
             {/* 📘 FROM THE ARCHIVES SECTION */}
             <ArchivesGallery photos={archivePhotos} />
->>>>>>> e21b9dba009de63931200253f0a745377ae8a9d4
           </div>
 
           <Footer />

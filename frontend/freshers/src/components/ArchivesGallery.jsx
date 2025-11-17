@@ -24,11 +24,13 @@ export default function ArchivesGallery({ photos }) {
         max-w-6xl mx-auto 
         grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
         gap-10 px-6
+        
       ">
         {photos.map((p, index) => (
           <motion.div
             key={index}
-            className="relative bg-white p-4 rounded-xl shadow-2xl"
+            className="relative relative bg-[#f3ead7]
+            p-4 rounded-xl shadow-2xl "
             style={{ rotate: `${randomRotation()}deg` }}
             whileHover={{ scale: 1.07, rotate: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 12 }}

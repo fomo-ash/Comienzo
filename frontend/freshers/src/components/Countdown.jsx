@@ -57,7 +57,7 @@ export default function Countdown({ targetDate, onEnd }) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-6 pt-12">
 
       <h3 className="text-white/80 text-xs tracking-widest uppercase drop-shadow-[0_0_30px_white]">
         T MINUS
