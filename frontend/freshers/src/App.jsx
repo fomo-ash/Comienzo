@@ -24,7 +24,7 @@ export default function App() {
         <>
           <NavBar />
           <Hero />
-          <div className="max-w-screen-2xl mx-auto px-8 lg:px-16">
+          <div className="max-w-screen-2xl mx-auto px-8 lg:px-16 ">
             
             <HighlightsGrid/>
             <Menu/>
