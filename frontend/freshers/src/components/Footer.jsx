@@ -27,7 +27,10 @@ return (
         </p>
         {/* 🌟 ADDED CONTACT INFO 🌟 */}
         <p className="text-sm text-gray-300">
-            For any queries, contact: 9769544049
+            For any queries, contact: <br/>
+            Sailen Sahoo (CR): +91 9769544049 <br/>
+            Rakshit Mohanty (ACR): +91 8114732140
+
         </p>
     </div>
   </div>

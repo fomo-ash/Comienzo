@@ -9,6 +9,10 @@ import {
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useDrag } from "@use-gesture/react";
 
+import Latent from "../assets/Latent.jpg";
+import fiesta from "../assets/fiesta.jpg";
+import jamming from "../assets/jamming.jpg";
+import soon from "../assets/ComingSoon.jpg";
 // --- 1. THE 3D TILT WRAPPER (Inner Card Effect) ---
 const TiltCard = ({ children, className, spotlightColor = "rgba(253, 224, 71, 0.3)" }) => {
   const ref = useRef(null);
@@ -113,29 +117,29 @@ export default function HighlightsGrid() {
   // Define events
   const events = [
     {
-      title: "Comedy Ke Sitare",
-      description: "Raw laughter, no filters. The best comics on campus.",
-      img: "https://images.unsplash.com/photo-1585699324551-f6c309eedeca?q=80&w=800&auto=format&fit=crop",
+      title: "CSE got Latent",
+      description: "The ultimate chance to showcase your talents beyond coding - be it singing, dancing, acting, or any unique skill you possess!",
+      img: Latent,
     },
     {
-      title: "Dance Hungama",
-      description: "Feel the rhythm. A high-energy dance showcase.",
-      img: "https://images.unsplash.com/photo-1533174072545-e8d4aa97d848?q=80&w=800&auto=format&fit=crop",
+      title: "Cultural Fiesta",
+      description: "Music, dance, drama - enjoy the vibrant Cultural/Modern performances.",
+      img: fiesta,
     },
     {
-      title: "Mystery Games",
-      description: "Solve the clues before time runs out.",
-      img: "https://images.unsplash.com/photo-1633265486064-086b219458ec?q=80&w=800&auto=format&fit=crop",
+      title: "Mehfil-e-Jamming",
+      description: "Jamming session with the Seniors. Music, vibes, and more.",
+      img: jamming,
     },
     {
-      title: "Neon Night",
-      description: "Glow sticks, rave vibes, and heart-thumping bass.",
-      img: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=800&auto=format&fit=crop",
+      title: "Coming Soon",
+      description: "SHH... It's a surprise event!",
+      img: soon,
     },
     {
-      title: "Code War",
-      description: "Battle of logic. Prove your coding dominance.",
-      img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop",
+      title: "Coming Soon",
+      description: "SHH... It's a surprise event!",
+      img: soon,
     },
   ];
 
