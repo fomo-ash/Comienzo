@@ -9,10 +9,14 @@ export default function Menu() {
       {/* MAIN SECTION */}
       <section id="menu" className="w-full py-20 flex justify-center">
         <div className="max-w-4xl w-full px-6">
+          
           {/* 🌟 STYLIZED "THE SPREAD" TITLE 🌟 */}
           <div className="relative z-10 px-6 md:px-12 mb-12 flex flex-col items-center text-center">
             <h1 className="text-5xl md:text-8xl font-black text-white leading-none tracking-tighter mb-4 uppercase">
-                THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">SPREAD</span>
+              THE{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">
+                SPREAD
+              </span>
             </h1>
           </div>
 
@@ -28,9 +32,10 @@ export default function Menu() {
               shadow-[0_0_40px_rgba(0,0,0,0.3)]
               cursor-pointer
             "
-            onClick={() => setOpen(true)} // ← OPEN FULL SCREEN & REMOVE COVER
+            onClick={() => setOpen(true)}
           >
-            {/* --- NEW MENU COVER (UPDATED TEXT) --- */}
+
+            {/* --- NEW MENU COVER (UPDATED FOR PHONES) --- */}
             {!open && (
               <div
                 className="
@@ -38,23 +43,27 @@ export default function Menu() {
                   rounded-2xl 
                   bg-black/70 backdrop-blur-sm 
                   flex items-center justify-center 
-                  text-white 
+                  px-4 text-center
                   transition-opacity duration-500 
                   hover:bg-black/60
                 "
               >
-                <p className="
-                  // 🌟 Increased Size for better visibility 🌟
-                  text-5xl md:text-7xl font-extrabold uppercase tracking-widest 
-                  text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500
-                  animate-pulse
-                ">
-                  TAP TO REVEAL                </p>
+                <p
+                  className="
+                    text-3xl sm:text-4xl md:text-6xl 
+                    font-extrabold uppercase tracking-widest 
+                    text-transparent bg-clip-text 
+                    bg-gradient-to-r from-yellow-300 to-yellow-500
+                    animate-pulse
+                  "
+                >
+                  TAP TO REVEAL
+                </p>
               </div>
             )}
             {/* --- END NEW MENU COVER --- */}
 
-            {/* MENU IMAGE (Always present inside the container) */}
+            {/* MENU IMAGE */}
             <img
               src="src/assets/menu.jpeg"
               alt="Comienzo Menu"
@@ -74,7 +83,7 @@ export default function Menu() {
         </div>
       </section>
 
-      {/* FULLSCREEN OVERLAY (Original structure retained) */}
+      {/* FULLSCREEN OVERLAY */}
       {open && (
         <div
           className="
@@ -83,16 +92,12 @@ export default function Menu() {
             z-50
             animate-fadeIn
           "
-          onClick={(e) => {
-            // Allows closing by clicking the backdrop
-            setOpen(false);
-          }}
+          onClick={() => setOpen(false)}
         >
           <img
             src="src/assets/menu.jpeg"
             alt="Menu Enlarged"
-            // Prevents closing when clicking on the image itself
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e) => e.stopPropagation()}
             className="
               w-[90%] max-w-3xl 
               rounded-xl shadow-2xl

@@ -8,6 +8,8 @@ import EntryAnimation from "./components/intro";
 import ArchivesGallery from "./components/ArchivesGallery";
 import Venue from "./components/venue";
 import Background from "./components/Background";
+import Music from "./components/music";
+import Attire from "./components/Attire";
 
 // IMPORT ARCHIVE IMAGES
 import img1 from "./assets/2.jpeg";
@@ -67,7 +69,9 @@ export default function App() {
           <Background />
           <NavBar />
           <Hero />
+          <Music/>
           <Venue />
+          <Attire/>
 
           <div className="max-w-screen-2xl mx-auto px-8 lg:px-16">
             <HighlightsGrid />
