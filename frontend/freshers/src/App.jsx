@@ -12,6 +12,9 @@ import Venue from "./components/venue";
 import img1 from "./assets/2.jpeg";
 import img2 from "./assets/1.jpeg";
 import img3 from "./assets/3.jpeg";
+import img4 from "./assets/something1.jpg";
+import img5 from "./assets/_DSC8026.jpg";
+import img6 from "./assets/something3.jpg";
 
 
 export default function App() {
@@ -22,9 +25,9 @@ export default function App() {
     { src: img1, caption: "The beginning ✦" },
     { src: img2, caption: "Golden night memories" },
     { src: img3, caption: "Laughs we won't forget" },
-    { src: img1, caption: "Captured joy ✦" },
-    { src: img2, caption: "Moments frozen in time" },
-    { src: img3, caption: "Batch memories ✦" },
+    { src: img4, caption: "Captured joy ✦" },
+    { src: img5, caption: "Moments frozen in time" },
+    { src: img6, caption: "Batch memories ✦" },
   ];
 
   return (
