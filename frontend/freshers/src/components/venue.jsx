@@ -2,7 +2,7 @@
 
 export default function Venue() {
   return (
-    <section className="py-20 w-full flex justify-center">
+    <section id="venue" className="py-20 w-full flex justify-center">
       <div className="max-w-4xl w-full px-6">
 
         <h2 className="text-center text-4xl font-extrabold text-yellow-300 mb-6 tracking-wide">

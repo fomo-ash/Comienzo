@@ -13,6 +13,8 @@ export default function NavBar() {
     setOpen(false);
   };
 
+  const navItems = ["events", "venue", "menu", "gallery"];
+
   return (
     <>
       {/* Floating Navbar */}
@@ -50,7 +52,7 @@ style={{ fontFamily: "Limelight, cursive" }}>
 
           {/* DESKTOP MENU */}
           <ul className="hidden lg:flex gap-10 text-white uppercase text-sm tracking-wider font-medium">
-            {["home", "events", "venue", "menu"].map((item) => (
+            {navItems.map((item) => (
               <li
                 key={item}
                 onClick={() => scrollToSection(item)}

@@ -7,7 +7,7 @@ const EVENT_DATE = "2025-11-23T18:00:00+05:30";
 
 export default function Hero() {
   return (
-    <section className="w-full min-h-screen flex flex-col lg:flex-row 
+    <section id="hero" className="w-full min-h-screen flex flex-col lg:flex-row 
       items-center justify-between 
       px-6 md:px-12 pb-5 lg:px-20 ">
 

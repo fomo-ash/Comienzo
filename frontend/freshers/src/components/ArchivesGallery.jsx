@@ -9,7 +9,7 @@ const randomRotation = () => {
 
 export default function ArchivesGallery({ photos }) {
   return (
-    <section className="w-full py-20 bg-transparent">
+    <section id="gallery" className="w-full py-20 bg-transparent">
       {/* TITLE */}
       <h2 className="text-center text-4xl md:text-5xl font-extrabold text-yellow-300 tracking-wide mb-3 drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
         FROM THE ARCHIVES

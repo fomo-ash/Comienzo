@@ -75,7 +75,7 @@ export default function HighlightsGrid() {
   ];
 
   return (
-    <div className="py-24 bg-transparent">
+    <div id="events"className="py-24 bg-transparent">
       <h1 className="text-4xl md:text-5xl font-extrabold text-white text-center drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] mb-2">
         EVENTS
       </h1>

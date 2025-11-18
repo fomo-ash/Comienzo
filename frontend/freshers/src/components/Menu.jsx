@@ -7,7 +7,7 @@ export default function Menu() {
   return (
     <>
       {/* MAIN SECTION */}
-      <section className="w-full py-20 flex justify-center">
+      <section id="menu" className="w-full py-20 flex justify-center">
         <div className="max-w-4xl w-full px-6">
 
           {/* TITLE */}
