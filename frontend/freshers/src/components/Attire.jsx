@@ -32,7 +32,7 @@ export default function Attire() {
           <h2 className="text-2xl font-bold text-white mb-3">For Boys</h2>
           <p className="text-white/70 leading-relaxed">
             • Semi-formals only <br />
-            • Shirts, chinos <br />
+            • Shirts, chinos, blazers recommended <br />
             • Avoid hoodies, shorts, and sandals
           </p>
         </div>
@@ -41,7 +41,7 @@ export default function Attire() {
         <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl shadow-xl">
           <h2 className="text-2xl font-bold text-white mb-3">For Girls</h2>
           <p className="text-white/70 leading-relaxed">
-            • Ethnic outfits only <br />
+            • Ethnic outfits (except saree) <br />
             • Kurtis, suits, lehengas, indo-western fits <br />
             • Avoid sarees & western partywear
           </p>
