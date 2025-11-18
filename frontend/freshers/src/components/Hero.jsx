@@ -2,6 +2,18 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Countdown from "./Countdown";
+import TiltCard from "./TiltCard";
+import MagneticButton from "./MagneticButton";
+
+const textVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "backOut" } }
+};
+
+const containerVariant = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.5 } }
+};
 
 const EVENT_DATE = "2025-11-23T18:00:00+05:30";
 
@@ -15,16 +27,20 @@ export default function Hero() {
       <div className="w-full lg:w-1/2 space-y-6 pt-32 md:pt-35 lg:pt-48">
         {/* ↑ increased mobile margin */}
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="text-5xl md:text-6xl lg:text-7xl 
-          font-extrabold leading-tight text-white"
-          style={{ fontFamily: "Limelight, cursive" }}>
-          Let the  
-          <span className="block text-yellow-300" style={{ fontFamily: "Limelight, cursive" }}>Chapter Unfold</span>
-        </motion.h1>
+        <motion.h1 
+  variants={containerVariant}
+  initial="hidden"
+  animate="visible"
+  className="text-6xl md:text-8xl font-extrabold leading-none text-white uppercase tracking-tighter"
+  style={{ fontFamily: "Limelight, cursive" }}
+>
+  {/* Split words to stagger them */}
+  {["Let", "The", "Chapter", "Unfold"].map((word, i) => (
+    <motion.span key={i} variants={textVariant} className={`inline-block mr-4 ${i > 1 ? 'text-yellow-300' : ''}`}>
+      {word}
+    </motion.span>
+  ))}
+</motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -35,51 +51,39 @@ export default function Hero() {
         COMIENZO marks the first chapter of your CSE journey - a night overflowing with energy, laughter, chaos, and memories that will stay with you long after the lights fade.
         </motion.p>
 
-     {/* BUTTONS */}
+     {/* BUTTONS CONTAINER */}
 <motion.div
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.35, duration: 0.7 }}
-  className="flex flex-col sm:flex-row flex-wrap gap-4 mt-6 w-full"
+  className="flex flex-col sm:flex-row flex-wrap gap-6 mt-8 w-full"
 >
   {/* YELLOW BUTTON */}
-  <motion.a
-    whileHover={{ scale: 1.07, boxShadow: "0px 0px 18px rgba(255, 230, 0, 0.6)" }}
-    whileTap={{ scale: 0.96 }}
+  <MagneticButton
     href="https://docs.google.com/forms/d/e/1FAIpQLSfxpSM_8xBvA7s3KSF0C_eEktU9T1J5oTKh4CxnIj_rzkXJJQ/viewform"
-    target="_blank"
-    rel="noopener noreferrer"
     className="
-      w-full sm:w-auto
-      text-center
-      px-6 py-3 bg-yellow-300 text-black font-semibold 
-      rounded-xl shadow-lg 
-      transition-all duration-300 hover:bg-yellow-400
+      w-full sm:w-auto text-center
+      px-8 py-4 bg-yellow-300 text-black font-bold text-lg
+      rounded-xl shadow-[0_0_15px_rgba(253,224,71,0.4)]
+      transition-colors duration-300 hover:bg-yellow-400
     "
   >
-    1st year Form
-  </motion.a>
+    1st Year Form
+  </MagneticButton>
 
   {/* WHITE BUTTON */}
-  <motion.a
-    whileHover={{ scale: 1.07, boxShadow: "0px 0px 16px rgba(255, 255, 255, 0.5)" }}
-    whileTap={{ scale: 0.96 }}
+  <MagneticButton
     href="https://docs.google.com/forms/d/e/1FAIpQLScR1FefXTBLhkQg23v8GZ_rq-173JYijEN-kGSQPTfAwhkB6g/viewform"
-    target="_blank"
-    rel="noopener noreferrer"
     className="
-      w-full sm:w-auto
-      text-center
-      px-6 py-3 bg-white text-black font-semibold 
-      rounded-xl shadow-lg 
-      transition-all duration-300 hover:bg-gray-200
+      w-full sm:w-auto text-center
+      px-8 py-4 bg-white text-black font-bold text-lg
+      rounded-xl shadow-[0_0_15px_rgba(255,255,255,0.3)]
+      transition-colors duration-300 hover:bg-gray-200
     "
   >
-    2nd year Form
-  </motion.a>
+    2nd Year Form
+  </MagneticButton>
 </motion.div>
-
-
 
         {/* MOBILE COUNTDOWN BELOW TEXT */}
         <div className="flex lg:hidden justify-center mt-10">
@@ -100,7 +104,9 @@ export default function Hero() {
           ml-10
         "
       >
+        <TiltCard>
         <Countdown targetDate={EVENT_DATE} />
+        </TiltCard>
       </motion.div>
 
     </section>

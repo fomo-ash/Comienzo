@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import EntryAnimation from "./components/intro";
 import ArchivesGallery from "./components/ArchivesGallery";
 import Venue from "./components/venue";
+import Background from "./components/Background";
 
 // IMPORT ARCHIVE IMAGES PROPERLY
 import img1 from "./assets/2.jpeg";
@@ -15,6 +16,7 @@ import img3 from "./assets/3.jpeg";
 import img4 from "./assets/something1.jpg";
 import img5 from "./assets/_DSC8026.jpg";
 import img6 from "./assets/something3.jpg";
+
 
 
 export default function App() {
@@ -41,6 +43,7 @@ export default function App() {
 
       {!showEntry && (
         <>
+          <Background />
           <NavBar />
           <Hero />
           <Venue />
