@@ -10,12 +10,15 @@ export default function Menu() {
       <section id="menu" className="w-full py-20 flex justify-center">
         <div className="max-w-4xl w-full px-6">
 
-          {/* TITLE */}
-          <h2 className="text-center text-4xl font-extrabold text-white mb-10 tracking-wide">
-            MENU
-          </h2>
+          {/* 🌟 STYLIZED "THE SPREAD" TITLE 🌟 */}
+          {/* This uses the font-black, large size, gradient-clip style */}
+          <div className="relative z-10 px-6 md:px-12 mb-12 flex flex-col items-center text-center">
+            <h1 className="text-5xl md:text-8xl font-black text-white leading-none tracking-tighter mb-4 uppercase">
+                THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">SPREAD</span>
+            </h1>
+          </div>
 
-          {/* GLASS CARD */}
+          {/* GLASS CARD (Original structure retained) */}
           <div
             className="
               backdrop-blur-xl 
@@ -26,7 +29,7 @@ export default function Menu() {
               shadow-[0_0_40px_rgba(0,0,0,0.3)]
               cursor-pointer
             "
-            onClick={() => setOpen(true)}   // ← OPEN FULL SCREEN
+            onClick={() => setOpen(true)}   // ← OPEN FULL SCREEN
           >
             <img
               src="src/assets/menu.jpeg"
@@ -47,7 +50,7 @@ export default function Menu() {
         </div>
       </section>
 
-      {/* FULLSCREEN OVERLAY */}
+      {/* FULLSCREEN OVERLAY (Original structure retained) */}
       {open && (
         <div
           className="
@@ -56,7 +59,7 @@ export default function Menu() {
             z-50
             animate-fadeIn
           "
-          onClick={() => setOpen(false)}    // ← CLOSE ON CLICK
+          onClick={() => setOpen(false)}    // ← CLOSE ON CLICK
         >
           <img
             src="src/assets/menu.jpeg"
