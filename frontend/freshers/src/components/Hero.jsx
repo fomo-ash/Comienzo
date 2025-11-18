@@ -21,9 +21,9 @@ export default function Hero() {
           transition={{ duration: 0.7 }}
           className="text-5xl md:text-6xl lg:text-7xl 
           font-extrabold leading-tight text-white"
-        >
+          style={{ fontFamily: "Limelight, cursive" }}>
           Let the  
-          <span className="block text-yellow-300">Chapter Unfold</span>
+          <span className="block text-yellow-300" style={{ fontFamily: "Limelight, cursive" }}>Chapter Unfold</span>
         </motion.h1>
 
         <motion.p
