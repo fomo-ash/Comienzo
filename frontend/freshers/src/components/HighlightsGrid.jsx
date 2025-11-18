@@ -1,8 +1,15 @@
-import React, { useRef } from "react";
-import { motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
+import { 
+  motion, 
+  useMotionValue, 
+  useSpring, 
+  useTransform, 
+  useMotionTemplate 
+} from "framer-motion";
 import { ChevronRight, ChevronLeft } from "lucide-react";
+import { useDrag } from "@use-gesture/react";
 
-// --- 3D TILT CARD COMPONENT ---
+// --- 1. THE 3D TILT WRAPPER (Inner Card Effect) ---
 const TiltCard = ({ children, className, spotlightColor = "rgba(253, 224, 71, 0.3)" }) => {
   const ref = useRef(null);
   
@@ -23,8 +30,8 @@ const TiltCard = ({ children, className, spotlightColor = "rgba(253, 224, 71, 0.
     const width = rect.width;
     const height = rect.height;
     
-    const rX = (e.clientY - rect.top - height / 2) / 20; 
-    const rY = (e.clientX - rect.left - width / 2) / 20; 
+    const rX = (e.clientY - rect.top - height / 2) / 15; 
+    const rY = (e.clientX - rect.left - width / 2) / 15; 
     x.set(rY);
     y.set(-rX);
 
@@ -42,27 +49,18 @@ const TiltCard = ({ children, className, spotlightColor = "rgba(253, 224, 71, 0.
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{
-        transformStyle: "preserve-3d",
-        rotateX,
-        rotateY,
-      }}
+      style={{ transformStyle: "preserve-3d", rotateX, rotateY }}
       className={`relative group ${className}`}
     >
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
           background: useMotionTemplate`
-            radial-gradient(
-              650px circle at ${spotlightX}px ${spotlightY}px,
-              ${spotlightColor},
-              transparent 80%
-            )
+            radial-gradient(650px circle at ${spotlightX}px ${spotlightY}px, ${spotlightColor}, transparent 80%)
           `,
           zIndex: 0,
         }}
       />
-      
       <div className="relative h-full rounded-2xl bg-[#0F766E]/30 backdrop-blur-xl p-1 shadow-xl ring-1 ring-white/10 transition-all duration-300 group-hover:ring-yellow-300/50">
         <div className="relative h-full overflow-hidden rounded-xl bg-black/50">
            {children}
@@ -72,122 +70,199 @@ const TiltCard = ({ children, className, spotlightColor = "rgba(253, 224, 71, 0.
   );
 };
 
-const EventCard = ({ title, description, img }) => {
+// --- 2. CAROUSEL ITEM (Handles the 3D Carousel Logic) ---
+const CarouselItem = ({ index, x, totalCards, cardWidth, children }) => {
+  const childInput = [
+    (index - 1) * -cardWidth, // Previous card position
+    index * -cardWidth,       // Current card position (center)
+    (index + 1) * -cardWidth, // Next card position
+  ];
+
+  // 3D Transforms based on position relative to center
+  const scale = useTransform(x, childInput, [0.85, 1, 0.85]);
+  const opacity = useTransform(x, childInput, [0.5, 1, 0.5]);
+  const rotateY = useTransform(x, childInput, [35, 0, -35]);
+  const zIndex = useTransform(x, childInput, [1, 10, 1]);
+
   return (
-    <TiltCard className="min-w-[340px] md:min-w-[400px] h-[500px] mx-4 snap-center shrink-0">
-      <div className="flex flex-col h-full relative z-10">
-        <div className="relative h-3/5 overflow-hidden">
-          <motion.img
-            src={img}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-1"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
-          <div className="absolute top-4 right-4 px-3 py-1 bg-yellow-300 text-black text-xs font-bold uppercase tracking-widest rounded-full">
-            Upcoming
-          </div>
-        </div>
-
-        <div className="p-6 flex-1 flex flex-col justify-end relative">
-            <div className="w-12 h-1 bg-yellow-300 mb-4 rounded-full transform origin-left transition-all duration-300 group-hover:w-24" />
-            <h2 className="text-3xl font-extrabold text-white mb-2 tracking-tight leading-none uppercase group-hover:text-yellow-200 transition-colors">
-              {title}
-            </h2>
-            <p className="text-gray-300 text-sm leading-relaxed line-clamp-3 group-hover:text-white transition-colors">
-              {description}
-            </p>
-        </div>
-
-        <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-      </div>
-    </TiltCard>
+    <motion.div
+      style={{
+        width: cardWidth,
+        x: useTransform(x, (value) => value + index * cardWidth), // Absolute positioning in the stack
+        scale,
+        opacity,
+        rotateY,
+        zIndex,
+        position: "absolute",
+        left: 0,
+        top: 0,
+        height: "100%",
+        transformStyle: "preserve-3d",
+        perspective: 800,
+      }}
+      className="flex items-center justify-center"
+    >
+      {children}
+    </motion.div>
   );
 };
 
+
+// --- 3. MAIN COMPONENT ---
 export default function HighlightsGrid() {
-  const scrollContainerRef = useRef(null);
-
-  const scroll = (direction) => {
-    if (scrollContainerRef.current) {
-      const { current } = scrollContainerRef;
-      const scrollAmount = direction === "left" ? -420 : 420;
-      current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
-
+  // Define events
   const events = [
     {
       title: "Comedy Ke Sitare",
-      description: "Prepare for an evening of side-splitting humor as our best comics take the stage. No filter, just raw laughter.",
+      description: "Raw laughter, no filters. The best comics on campus.",
       img: "https://images.unsplash.com/photo-1585699324551-f6c309eedeca?q=80&w=800&auto=format&fit=crop",
     },
     {
       title: "Dance Hungama",
-      description: "Feel the rhythm, embrace the beat. A high-energy dance showcase that will leave you breathless and wanting more.",
+      description: "Feel the rhythm. A high-energy dance showcase.",
       img: "https://images.unsplash.com/photo-1533174072545-e8d4aa97d848?q=80&w=800&auto=format&fit=crop",
     },
     {
       title: "Mystery Games",
-      description: "Trust no one. Solve the clues before time runs out in this intense, mind-bending interactive experience.",
+      description: "Solve the clues before time runs out.",
       img: "https://images.unsplash.com/photo-1633265486064-086b219458ec?q=80&w=800&auto=format&fit=crop",
     },
     {
       title: "Neon Night",
-      description: "When the lights go down, the glow sticks come out. A rave experience right in the heart of the campus.",
+      description: "Glow sticks, rave vibes, and heart-thumping bass.",
       img: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=800&auto=format&fit=crop",
     },
     {
       title: "Code War",
-      description: "A battle of logic and speed. Prove your coding dominance in this high-stakes hackathon showdown.",
+      description: "Battle of logic. Prove your coding dominance.",
       img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop",
     },
   ];
-  return (
-    <section id="events" className="py-32 relative overflow-visible">
-      {/* GLOWING BACKGROUND ORB */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-yellow-300/10 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="relative z-10 px-6 md:px-12 mb-12 flex flex-col md:flex-row items-end justify-between gap-6">
-        <div>
-          <h1 className="text-5xl md:text-7xl font-black text-white leading-none tracking-tighter mb-2">
-            THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">LINEUP</span>
-          </h1>
-          <p className="text-white/60 text-lg max-w-md">
-            Swipe through the chaos. Click to claim your spot.
-          </p>
-        </div>
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [width, setWidth] = useState(0);
+  const containerRef = useRef(null);
+  
+  // CONFIG
+  // Mobile: Card width is smaller to fit screen. Desktop: Larger.
+  const CARD_WIDTH = width < 640 ? width * 0.85 : 400; 
+  
+  const x = useSpring(0, { stiffness: 150, damping: 20 });
+
+  useEffect(() => {
+    if (containerRef.current) {
+      setWidth(containerRef.current.offsetWidth);
+    }
+    const handleResize = () => {
+      if (containerRef.current) setWidth(containerRef.current.offsetWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Sync spring with current index
+  useEffect(() => {
+    x.set(-currentIndex * CARD_WIDTH);
+  }, [currentIndex, CARD_WIDTH, x]);
+
+  const bind = useDrag(
+    ({ movement: [mx], direction: [dx], velocity: [vx], cancel, active }) => {
+      // Determine swipe threshold
+      if (!active) {
+        const swipeConfidenceThreshold = 100;
+        const swipe = Math.abs(mx) > swipeConfidenceThreshold && Math.abs(vx) > 0.2;
         
-        {/* NAVIGATION ARROWS */}
-        <div className="flex gap-4">
-            <button 
-                onClick={() => scroll("left")}
-                className="p-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-yellow-300 hover:text-black transition-all duration-300 backdrop-blur-md group"
-            >
-                <ChevronLeft size={32} className="group-hover:-translate-x-1 transition-transform" />
-            </button>
-            <button 
-                onClick={() => scroll("right")}
-                className="p-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-yellow-300 hover:text-black transition-all duration-300 backdrop-blur-md group"
-            >
-                <ChevronRight size={32} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+        if (swipe) {
+          let newIndex = currentIndex + (dx > 0 ? -1 : 1);
+          // Clamp index
+          if (newIndex < 0) newIndex = 0;
+          if (newIndex >= events.length) newIndex = events.length - 1;
+          setCurrentIndex(newIndex);
+        } else {
+          // Snap back if drag wasn't enough
+          x.set(-currentIndex * CARD_WIDTH);
+        }
+      } else {
+        // While dragging
+        x.set(-currentIndex * CARD_WIDTH + mx);
+      }
+    },
+    { axis: "x", filterTaps: true }
+  );
+
+  return (
+    <section id="events" className="py-24 md:py-32 relative overflow-hidden min-h-[800px] flex flex-col justify-center">
+      {/* GLOWING BACKGROUND ORB */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-yellow-300/10 blur-[100px] rounded-full pointer-events-none" />
+
+      {/* TEXT HEADER */}
+      <div className="relative z-10 px-6 md:px-12 mb-12 flex flex-col items-center text-center">
+        <h1 className="text-5xl md:text-8xl font-black text-white leading-none tracking-tighter mb-4">
+          THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">LINEUP</span>
+        </h1>
+        <p className="text-white/60 text-lg max-w-md">
+          Drag, swipe, or click to explore the chaos.
+        </p>
+      </div>
+
+      {/* 3D CAROUSEL AREA */}
+      <div 
+        ref={containerRef}
+        className="relative h-[500px] w-full flex items-center justify-center perspective-1000 cursor-grab active:cursor-grabbing touch-none"
+        {...bind()}
+      >
+        {/* CARDS CONTAINER CENTERED */}
+        <div className="relative h-full" style={{ width: CARD_WIDTH }}> 
+          {events.map((ev, i) => (
+            <CarouselItem key={i} index={i} x={x} totalCards={events.length} cardWidth={CARD_WIDTH}>
+              <TiltCard className="w-full h-full">
+                <div className="flex flex-col h-full relative z-10 select-none">
+                  {/* IMAGE */}
+                  <div className="relative h-3/5 overflow-hidden">
+                    <img
+                      src={ev.img}
+                      alt={ev.title}
+                      className="w-full h-full object-cover pointer-events-none"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+                    <div className="absolute top-4 right-4 px-3 py-1 bg-yellow-300 text-black text-xs font-bold uppercase tracking-widest rounded-full">
+                      Upcoming
+                    </div>
+                  </div>
+
+                  {/* CONTENT */}
+                  <div className="p-6 flex-1 flex flex-col justify-end relative">
+                      <div className="w-12 h-1 bg-yellow-300 mb-4 rounded-full" />
+                      <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-2 uppercase leading-none">
+                        {ev.title}
+                      </h2>
+                      <p className="text-gray-300 text-sm leading-relaxed">
+                        {ev.description}
+                      </p>
+                  </div>
+                </div>
+              </TiltCard>
+            </CarouselItem>
+          ))}
         </div>
       </div>
 
-      {/* Horizontal Scroll Row */}
-      <div 
-        ref={scrollContainerRef}
-        className="
-          flex gap-6 overflow-x-auto pb-16 px-6 md:px-12 
-          snap-x snap-mandatory scroll-smooth
-          no-scrollbar 
-          mask-image-linear-gradient(to right, transparent, black 5%, black 95%, transparent)
-        "
-        style={{ scrollbarWidth: 'none' }}
-      >
-        {events.map((ev, i) => (
-          <EventCard key={i} {...ev} />
-        ))}
+      {/* NAVIGATION BUTTONS (Desktop Only) */}
+      <div className="hidden md:flex justify-center gap-6 mt-8 relative z-20">
+        <button 
+          onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
+          disabled={currentIndex === 0}
+          className="p-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-yellow-300 hover:text-black transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-white"
+        >
+          <ChevronLeft size={32} />
+        </button>
+        <button 
+          onClick={() => setCurrentIndex(Math.min(events.length - 1, currentIndex + 1))}
+          disabled={currentIndex === events.length - 1}
+          className="p-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-yellow-300 hover:text-black transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-white"
+        >
+          <ChevronRight size={32} />
+        </button>
       </div>
     </section>
   );
