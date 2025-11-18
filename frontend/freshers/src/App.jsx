@@ -9,7 +9,7 @@ import ArchivesGallery from "./components/ArchivesGallery";
 import Venue from "./components/venue";
 import Background from "./components/Background";
 
-// IMPORT ARCHIVE IMAGES PROPERLY
+// IMPORT ARCHIVE IMAGES
 import img1 from "./assets/2.jpeg";
 import img2 from "./assets/1.jpeg";
 import img3 from "./assets/3.jpeg";
@@ -17,12 +17,30 @@ import img4 from "./assets/something1.jpg";
 import img5 from "./assets/_DSC8026.jpg";
 import img6 from "./assets/something3.jpg";
 
-
+// --- NIGHT ATMOSPHERE COMPONENT ---
+const NightOverlay = () => (
+  <div className="fixed inset-0 z-[40] pointer-events-none overflow-hidden h-full w-full">
+    {/* 1. NOISE/FILM GRAIN TEXTURE */}
+    <div 
+      className="absolute inset-0 opacity-[0.12] mix-blend-overlay"
+      style={{ 
+        backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')",
+        filter: "contrast(170%) brightness(1000%)" 
+      }}
+    ></div>
+    
+    {/* 2. DARK VIGNETTE (Darkens the edges) */}
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_10%,rgba(0,0,0,0.7)_100%)]"></div>
+    
+    {/* 3. COLOR TINT (Subtle teal wash to unify) */}
+    <div className="absolute inset-0 bg-[#0F766E] mix-blend-color opacity-10"></div>
+  </div>
+);
 
 export default function App() {
   const [showEntry, setShowEntry] = useState(true);
 
-  // ARCHIVE PHOTOS LIST (NOW VALID)
+  // ARCHIVE PHOTOS LIST
   const archivePhotos = [
     { src: img1, caption: "The beginning ✦" },
     { src: img2, caption: "Golden night memories" },
@@ -33,16 +51,19 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#0F766E] via-[#0b5e59] to-[#073f3c] relative">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#052e2b] via-[#041f1d] to-[#000000] relative text-white overflow-x-hidden">
       
+      {/* Render the Night Effect everywhere */}
+      <NightOverlay />
+
       {showEntry && (
-        <div className="absolute inset-0 z-50 bg-gradient-to-br from-[#0F766E] via-[#0b5e59] to-[#073f3c]">
+        <div className="fixed inset-0 z-[9999]">
           <EntryAnimation onFinish={() => setShowEntry(false)} />
         </div>
       )}
 
       {!showEntry && (
-        <>
+        <div className="relative z-10">
           <Background />
           <NavBar />
           <Hero />
@@ -57,7 +78,7 @@ export default function App() {
           </div>
 
           <Footer />
-        </>
+        </div>
       )}
     </div>
   );
