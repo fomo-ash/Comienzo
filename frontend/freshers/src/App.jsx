@@ -19,7 +19,7 @@ import img6 from "./assets/something3.jpg";
 
 // --- NIGHT ATMOSPHERE COMPONENT ---
 const NightOverlay = () => (
-  <div className="fixed inset-0 z-[40] pointer-events-none overflow-hidden h-full w-full">
+  <div className="fixed inset-0 z-[100000] pointer-events-none overflow-hidden h-full w-full">
     {/* 1. NOISE/FILM GRAIN TEXTURE */}
     <div 
       className="absolute inset-0 opacity-[0.12] mix-blend-overlay"

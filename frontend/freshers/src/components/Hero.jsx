@@ -15,7 +15,7 @@ const containerVariant = {
   visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.5 } }
 };
 
-const EVENT_DATE = "2025-11-23T18:00:00+05:30";
+const EVENT_DATE = "2025-11-23T10:00:00+05:30";
 
 export default function Hero() {
   return (
